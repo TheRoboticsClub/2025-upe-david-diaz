@@ -29,7 +29,7 @@ probar o editar si queremos modificarlo. Le daremos a *Guardar* y
 esperaremos a que termine de crearse.
 
 <div style="text-align: center;">
-  <img src="img_2.png" alt="Descripción de la imagen">
+  <img src="img.png" alt="Descripción de la imagen">
 </div>
 
 - **7.** Al terminar de crearse ya estaría listo para usarse. Podemos entrar en
@@ -45,5 +45,5 @@ hacemos una modificación. Para ello, le daremos a *Probar* en el menú
 superior.
 
 <div style="text-align: center;">
-  <img src="img_3.png" alt="Descripción de la imagen">
+  <img src="img_1.png" alt="Descripción de la imagen">
 </div>
