@@ -1,8 +1,8 @@
 # Google Cloud para un contenedor Docker en la nube
 
 ## Pasos:
-- **1.** Primero de todo iremos a *Elastic Container  Registry* de
-AWS, apartado repositorios, y crearemos un nuevo repositorio.
+- **1.** Primero de todo iremos a *Elastic Container Registry* de
+AWS, en *Repositorios*, y crearemos un nuevo repositorio.
 
 - **2.** Ahora, rellenamos los campos solicitados y le damos a crear.
 

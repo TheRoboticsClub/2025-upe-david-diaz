@@ -10,3 +10,6 @@
 
 - **2.** Ahora rellenamos los campos de *Nombre de la aplicación*, ...
 y creamos la aplicación.
+
+Para ello, lo mejor será usar **AWS Lambda** que nos permite ejecutar 
+código sin servidor, en respuesta a eventos.
