@@ -45,3 +45,14 @@ y 2 M solicitudes al mes.
 Mayor lentitud a la hora de cambios en el cógido, al tener que estar
 haciendo *commits* y desplegando la aplicación de nuevo desde local a
 remoto en Azure.
+
+> Google Cloud es el mejor para análisis de datos, Big Data, para el 
+> uso de Inteligencia Artificial (IA), y para contenedores en la nube.
+> 
+> AWS es el que más variedad de servicios y funcionalidades ofrece, 
+> pero el nivel gratuito solo está disponible durante 6 meses o 200
+> USD en créditos.
+> 
+> Azure es el mejor si ya se usan servicios híbridos, ya que permite
+> utilizarla con otras nubes. Además, es compatible con los servicios
+> de Microsoft, al ser de su propiedad.
