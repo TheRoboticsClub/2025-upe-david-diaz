@@ -1,5 +1,3 @@
-# Comparativa Google Cloud, AWS y Azure
-
 En este documento se compararán las nubes de **Google Cloud**, **AWS**
 y **Azure**. Para ello se tendrá en cuenta en todas el paquete gratuito
 para Cloud Computing y ejecución de programas y contenedores en ellas.
