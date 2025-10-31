@@ -5,8 +5,8 @@ order: 4
 ---
 
 
-> [!TIP]  
 > Información de mi trabajo personal en JdeRobot.
+{: .prompt-tip}
 
 Este Blog resume mis trabajos de Prácticas en empresas con JdeRobot,
 dentro del equipo del proyecto [Unibotics](https://unibotics.org/).
