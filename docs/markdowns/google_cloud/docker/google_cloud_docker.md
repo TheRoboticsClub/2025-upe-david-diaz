@@ -1,25 +1,5 @@
 # Google Cloud para un contenedor Docker en la nube
 
-## Pasos:
-- **1.** Después de iniciar sesión iremos al apartado "*Consola*", en la parte
-superior derecha de la pantalla.
-
-- **2.** Luego, creamos un nuevo proyecto en Google Cloud.
-
-- **3.** A continuación, ya creado, le daremos a "*Implementar una aplicación*".
-
-<div style="text-align: center;">
-  <img src="../img.png" alt="Descripción de la imagen">
-</div>
-
-- **4.** En el menú izquierdo, en Descripción General, podemos conectar
-con un repositorio GitHub, implementar un contenedor Docker... Le daremos a
-"*Implementa un contenedor*".
-
-<div style="text-align: center;">
-  <img src="../img_1.png" alt="Descripción de la imagen">
-</div>
-
 > [!IMPORTANT]  
 > Para poder subir un contenedor a Google Cloud con Google Run hay que
 > haberlo subido anteriormente al registro privado de imágenes de Google.
@@ -43,6 +23,26 @@ con un repositorio GitHub, implementar un contenedor Docker... Le daremos a
 > ```
 > 
 > Para que funcione habrá que tener la API de Google Container Registry activada.
+
+## Pasos:
+- **1.** Después de iniciar sesión iremos al apartado "*Consola*", en la parte
+superior derecha de la pantalla.
+
+- **2.** Luego, creamos un nuevo proyecto en Google Cloud.
+
+- **3.** A continuación, ya creado, le daremos a "*Implementar una aplicación*".
+
+<div style="text-align: center;">
+  <img src="../img.png" alt="Descripción de la imagen">
+</div>
+
+- **4.** En el menú izquierdo, en Descripción General, podemos conectar
+con un repositorio GitHub, implementar un contenedor Docker... Le daremos a
+"*Implementa un contenedor*".
+
+<div style="text-align: center;">
+  <img src="../img_1.png" alt="Descripción de la imagen">
+</div>
 
 - **5.** A continuación, rellenamos los campos necesarios, URL del contenedor,
 Nombre del Servicio... y le damos a *Crear*. Y sería entrar en la URL y listo.
