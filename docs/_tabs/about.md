@@ -5,11 +5,12 @@ order: 4
 ---
 
 
-Información de mi trabajo personal en JdeRobot.
+> [!TIP]  
+> Información de mi trabajo personal en JdeRobot.
 
 Este Blog resume mis trabajos de Prácticas en empresas con JdeRobot,
-dentro del equipo del proyecto Unibotics (https://unibotics.org/).
+dentro del equipo del proyecto [Unibotics](https://unibotics.org/).
 
 Unibotics es una plataforma web de programación de robots en Python
 que permite programar robots desde el minuto 1 y evita la instalación
-local  gracias al backend multiplatforma.
+local gracias al backend multiplatforma.
