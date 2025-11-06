@@ -63,32 +63,22 @@ de este puerto
 * **7163:** Websocket 
 
 ## Base de datos:
-Tiene 12 tablas:
-* **auth_group:** Grupos autorizados.
-  * id
-  * name
-* **auth_group_permissions:** Permisos de los grupos autorizados.
-  * id
-  * name
-  * permission_id
-* **auth_permission:** Lista de permisos.
-  * id
-  * content_type_id 
-  * codename 
-  * name
-* **auth_user:** Lista de usuarios web.
-  * id
-  * password
-  * last_login
-  * is_superuser
-  * username
-  * last_name
-  * email
-  * is_staff
-  * is_active
-  * date_joined
-  * first_name
-* **auth_user_groups:** Grupos de usuarios. 
-  * id
-  * user_id
-  * group_id
+Tiene 12 tablas, con el siguiente formato:  
+https://github.com/JdeRobot/RoboticsAcademy/blob/humble-devel/docs/database.md
+
+## Servidor:
+Usa **Django** para la parte de servidor y páginas web.
+
+## Contribuir:
+Clonar el repositorio de RoboticsAcademy:  
+(sin el argumento -b se trabajará en la rama *main*)
+```shell
+git clone --recurse-submodules https://github.com/JdeRobot/RoboticsAcademy.git -b <src-branch>
+cd RoboticsAcademy/
+```
+Luego:
+(sin argumentos se preparará un escenario con la rama actual)
+```shell
+./scripts/develop_academy.sh -r <link to the RAM repo/fork> -b <branch of the RAM repo> -i <humble>
+
+```
