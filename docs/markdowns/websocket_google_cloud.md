@@ -9,7 +9,7 @@ servidor en un Docker y lo subiremos a la nube de Google Cloud.
 
 Para ello usaremos los siguientes ficheros:
 
-#### echo-server.py
+#### echo_server.py
 ```python
 """Websocket Python echo server."""
 
@@ -50,7 +50,9 @@ FROM python:3.11-slim
 WORKDIR /app
 RUN pip install websockets
 COPY . .
-CMD ["python", "server.py"]
+
+# Usamos -u para ver los logs en el terminal
+CMD ["python", "-u", "echo_server.py"]
 ```
 
 Ahora, para crear el Docker y probarlo en local, ejecutaremos:
@@ -62,3 +64,42 @@ docker build -t ws-echo-server .
 # Mapeamos el puerto 7163 al 7163
 docker run -p 7163:7163 ws-echo-server
 ```
+
+Una vez hemos comprobado que funciona correctamente en local, vamos a subir el
+Docker a la nube de Google Cloud, con Cloud Run. Para ello, ejecutaremos:
+```shell
+docker login
+```
+```shell
+docker tag ws-echo-server <dockerhub_name>/ws-echo-server:latest
+```
+```shell
+docker push <dockerhub_name>/ws-echo-server:latest
+```
+
+Y, ahora seguiremos los pasos de [este documento](google_cloud/docker/google_cloud_docker.md)
+poniendo el número mínimo de instancias en 0 para que no consuma CPU si no hay ninguna
+petición.
+
+Una vez en la nube, vamos a probarlo con el cliente local y la URL de Google Run:
+```python
+import asyncio
+import websockets
+
+BROWSER_PORT = 7163
+
+GOOGLE_CLOUD_URL = 'wss://URL.run.app'  # Use wss:// because of Google Run security
+MESSAGE = 'test message'  # Neccessary information
+
+async def send_msg(msg: str):
+    async with websockets.connect(GOOGLE_CLOUD_URL) as web_socket:
+        await web_socket.send(msg)
+        
+        response = await web_socket.recv()
+        print(f'Received from server: {response}')
+
+asyncio.run(send_msg(MESSAGE))
+```
+
+Al ejecutar esto, debería de salirnos en nuestro terminal el mensaje enviado al
+servidor de la nube.
