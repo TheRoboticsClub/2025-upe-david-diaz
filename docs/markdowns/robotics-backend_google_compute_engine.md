@@ -1,67 +1,79 @@
-# Despliegue de Robotics-Backend en Google Compute Engine
+# Despliegue de RoboticsBackend en Google Compute Engine
 
 ## Pasos:
-- **1.** Crear una nueva instancia de Maquina Virtual.
+- **1.** Crear una nueva instancia de Máquina Virtual.
 - **2.** Rellenar los campos necesarios que salen por pantalla.
 
-## Estimación de coste mensual segun configuraciones predeterminadas y zona: 
+Usaremos:
+#### Configuración de la máquina
+- **Región:** europe-west1 (Bélgica)
+- **Máquina:** e2-standard-4 (4 vCPU, 2 núcleos, 16 GB de RAM)
 
-Región: europe-southwest1 (Madrid), zona cualquiera
+#### SO y almacenamiento
+- **Sistema operativo:** Ubuntu
+- **Versión:** Ubuntu 24.04 LTS Minimal (x86-64 amd64 noble minimal image)
+- **Tipo de disco de arranque:** Disco persistente balanceado
+- **Tamaño:** 50 GB
 
-    E2 (Procesamiento diario de bajo costo), Plataforma Intel Broadwell:
+#### Protección de datos
+- **Sin copias de seguridad:** Al ser para pruebas
 
-        E2-standard-4 (2 vCPU, 2 núcleos, 16 GB RAM):
-        115.92 USD/mes; 0.161 USD/hora
+#### Redes
+- **Firewall:** Permitir tráfico HTTP, permitir tráfico HTTPS
 
-        e2-standard-8 (4 CPU virtuales, 4 núcleos, 32GB RAM):
-        231.37 USD/mes; 0.321 USD/hora
-    
-    N1 (Precio y rendimiento equilibrados), Plataforma Intel Haswell:
-        N1-standard-4 (4 vCPU, 2 núcleos, 15 GB RAM):
-        107.20 USD/mes; 0.149 USD/hora
+#### Observabilidad
+- **Instalar el Agente de operaciones para supervisión y registros:** Para
+tener datos de registros y métricas, y saber lo que consume.
 
-    N2D (Precio y rendimiento equilibrados), Plataforma ADM Milan:
-        n2d-standard-8 (8 vCPU, 4 núcleos, 32 GB RAM):
-        233.37 UDS/mes; 0.324 USD/hora
+#### Seguridad
+- **Predeterminado**
 
-Región: europe-west1 (Bélgica), zona cualquiera:
+#### Avanzado
+- **Predeterminado**
 
-    E2, Plataforma Intel Broadwell:
+Y ahora le damos a *Crear*.
 
-        e2-standard-4 (2 vCPU, 2 núcleos, 16 GB RAM):
-        108.62 USD/mes (-7.3 USD/mes respecto a Madrid); 0.151 USD/hora
+## Instalación de RoboticsBackend en instancia de Máquina Virtual
+Una vez tenemos la instancia creada, ejecutaremos:
+```shell
+# Actualizar la lista de paquetes
+sudo apt update
+```
+```shell
+# Instalar Docker en Ubuntu
+sudo apt install docker.io -y
+```
+```shell
+# Asegurarse de que el servicio está iniciado y habilitado
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+```shell
+# Descargar la imágen de RoboticsBackend
+sudo docker pull jderobot/robotics-backend:latest
+```
 
-        e2-standard-8 (4 vCPU, 4 núcleos, 32GB RAM):
-        216.25 USD/mes (-15.12 USD/mes respecto a Madrid); 0.3 USD/hora
-    
-    N1, Plataforma Intel Haswell:
-        n1-standard-4 (4 vCPU, 2 núcleos, 15 GB RAM):
-        107.80 USD/mes (+0.60 USD/mes respecto a Madrid); 0.15 USD/hora
+> [!IMPORTANT]
+> Para poder utilizar los puertos que queremos tendremos que **crear una
+> regla de firewall**. Para ello, estando en el proyecto donde instanciamos
+> la Máquina Virtual, nos vamos al menú de las 3 barras horizontales (zona
+> superior izquierda) y nos vamos a **Red de VPC > Firewall**.  
+> Una vez aquí, le daremos a *Crear una nueva regla de firewall* (en la
+> zona superior de la pantalla) y rellenaremos los campos:
+> - **Nombre:** allow-robotics-backend-ports (o el nombre que queramos).
+> - **Registros:** Desactivado (para reducir los costes de Logging)
+> - **Dirección de tráfico:** Entrada
+> - **Destinos:** Todas las instancias de la red (para incluir la MV)
+> - **Filtro de origen:** Rangos de IP
+> - **Rangos de IP de origen:** 0.0.0.0/0 (permitir todas las de Internet)
+> - **Protocolos y puertos:** Protocolos y puertos especificados
+>   - **TCP**: 1108, 6080, 7163 (los de RoboticsBackend)
+> 
+> Y le damos a *Crear*. 
 
-    N2D, Plataforma ADM Milan:
-        n2d-standard-8 (8 vCPU, 4 núcleos, 32 GB RAM):
-        218.12 UDS/mes (-15.25 USD/mes respecto a Madrid); 0.303 USD/hora
+```shell
+docker run --rm -it -p 6080:6080 -p 1108:1108 -p 7163:7163 jderobot/robotics-backend:latest
+```
 
-> [!IMPORTANT]  
-> **Detener la instancia cuando no se esté usando para disminuir costes.**
-
-
-# Despliegue de Robotics-Backend en AWS con EC2
-
-## Pasos:
-- **1.** Seleccionar instancia EC2.
-- **2.** Rellenar los campos necesarios que salen por pantalla.
-
-## Precio estimado
-
-Región: Madrid (eu-south-1)
-
-    Instancia:
-        t3.large (4 CPU virtual, 16 GB de memoria):
-        121.50 USD/mes aprox; 0.169 USD/hora
-        
-        m5.xlarge (4 CPU virtual, 16 GB de memoria):
-        160 USD/mes aprox; 0.222 USD/hora
-
-> [!IMPORTANT]  
-> **Detener la instancia cuando no se esté usando para disminuir costes.**
+Y ya nos podríamos comunicar con el Roboticsbackend corriendo en la nube
+de Google Compute Engine, usando la IP externa de la instancia de MV.
