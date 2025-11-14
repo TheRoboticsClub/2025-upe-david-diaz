@@ -80,5 +80,4 @@ Luego:
 (sin argumentos se preparará un escenario con la rama actual)
 ```shell
 ./scripts/develop_academy.sh -r <link to the RAM repo/fork> -b <branch of the RAM repo> -i <humble>
-
 ```
