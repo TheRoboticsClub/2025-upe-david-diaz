@@ -74,7 +74,7 @@ Los puertos utilizados por RoboticsBackend para su uso son:
 
 ## Base de datos:
 Tiene 12 tablas, con el siguiente formato:  
-https://github.com/JdeRobot/RoboticsAcademy/blob/humble-devel/docs/database.md
+[https://github.com/JdeRobot/RoboticsAcademy/blob/humble-devel/docs/database.md](https://github.com/JdeRobot/RoboticsAcademy/blob/humble-devel/docs/database.md)
 
 ## Servidor:
 RoboticsAcademy usa **Django** para la parte de servidor y páginas web, así como
