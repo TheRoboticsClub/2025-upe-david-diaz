@@ -97,7 +97,7 @@ EMAIL_PORT=587
 
 ### Dumps de ejercicios y universos
 ```shell
-# En el directorio unibotics-webserver/unibotics
+# En el directorio unibotics-webserver/unibotics (usando WSL)
 docker exec -i academy_db psql -U user-dev -d academy_db < static/RIdatabase/database/universes.sql
 docker exec -i academy_db psql -U user-dev -d academy_db < static/RIdatabase/database/3d_models.sql
 docker exec -i academy_db psql -U user-dev -d academy_db < static/RoboticsAcademy/database/exercises/db.sql
@@ -107,5 +107,59 @@ docker exec -i academy_db psql -U user-dev -d academy_db < static/RoboticsAcadem
 ### Migraciones
 En el directorio unibotics-webserver/unibotics
 ```shell
+python manage.py migrate
+```
+Si este comando lanza un error ``django.db.utils.OperationalError`` es posible que sea
+producido porque haya 2 procesos (el Docker de la base de datos y otro) escuchando en
+el puerto de la base de datos, para comprobarlo ejecuta:
+```shell
+netstat -ano | findstr :5432
+```
+y mira si en la columna de la derecha (los PID) sale un solo número (aunque sea repetido)
+o salen varios (números distintos repetidos). Si salen varios, hay que ir al Administrador
+de tareas y *Finalizar tarea* para el que **NO** sea de ``com.docker.backend.exe``, y ahora
+debería de funcionar el comando ``python manage.py migrate``.
 
+### Configurar usuarios de prueba
+Esto habrá que hacerlo la primera vez:
+```shell
+# Desde el directorio unibotics-webserver (usando WSL)
+docker exec -i academy_db psql -U user-dev -d academy_db < utils/dumps/new_dump.sql
+```
+
+### Arrancar servidor Django
+Para ello ejecutaremos:
+```shell
+# Desde el directorio unibotics-webserver/unibotics
+python manage.py runserver <puerto>
+```
+Siendo <puerto> el puerto que queramos usar, **debe coincidir con la variable SERVER_PORT
+del archivo .env**, en nuestro caso el número 7000.  
+Después de eso deberíamos poder entrar en http://127.0.0.1:7000/ y ver la página de Unibotics.
+
+### Usuarios de prueba
+Para usar nuestro despliegue en D1 podemos usar los siguientes usuarios:
+
+| Usuario            | Role       | Contraseña      |
+|--------------------|------------|-----------------|
+| user               | Admin      | pass            |
+| admin              | Admin      | admin           |
+| admin_dummy        | Admin      | pass            |
+| admin_dummy_2      | Admin      | unibotics123456 |
+| admin_dummy_3      | Admin      | unibotics123456 |
+| betatester_dummy_1 | Betatester | unibotics123456 |
+| betatester_dummy_2 | Betatester | unibotics123456 |
+| betatester_dummy_3 | Betatester | unibotics123456 |
+| student_dummy_1    | Alumno     | unibotics123456 |
+| student_dummy_2    | Alumno     | unibotics123456 |
+| student_dummy_3    | Alumno     | unibotics123456 |
+
+### Docker de RoboticsBackend
+Por último, lo que nos falta es lanzar el Docker de RoboticsBackend, para ello ejecutaremos:
+```shell
+# Si no lo tenemos descargado
+docker pull jderobot/robotics-backend:latest
+
+# Ejecutarlo (si da error quitar ``--gpus all`` y ``--device /dev/dri``)
+docker run --rm -it --gpus all -v /usr/lib/wsl:/usr/lib/wsl -e LD_LIBRARY_PATH=/usr/lib/wsl/lib --device /dev/dri -p 6080:6080 -p 1108:1108 -p 7163:7163 jderobot/robotics-backend:latest
 ```
