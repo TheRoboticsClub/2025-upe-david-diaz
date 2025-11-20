@@ -1,4 +1,4 @@
-# Conectarse con el RoboticsBackend corriendo en la nube
+# Conectarse con el RoboticsBackend corriendo en local con unibotics-webserver D1
 
 Una vez ya hemos conseguido desplegar y ejecutar el RoboticsBackend en la nube
 de Google Cloud, con Google Compute Engine, el último paso es conectarse a ese
@@ -28,6 +28,13 @@ Una vez la tenemos, desde PyCharm ejecutamos:
 ```shell
 # Clonar repositorio con los submodulos
 git clone --recurse-submodules https://github.com/JdeRobot/unibotics-webserver.git
+
+# Si no se clonan bien ejecutar:
+cd unibotics-webserver
+git submodule update --init --recursive
+
+# Si sigue sin estar clonado algún submodulo usar:
+git submodule update --force unibotics/static/<submodulo>
 
 # Instalar dependencias
 cd unibotics-webserver
@@ -67,6 +74,10 @@ nvm install 17  # Instalar nodo 17
 nvm use 17  # Activar nodo 17
 cd unibotics-webserver/unibotics/react_frontend  # Moverse de carpeta unibotics/react_frontend
 npm run dev  # Lanzar webpack
+
+# Si salen errores de *Module not found: Error: Can't resolve ...* relacionado con
+# BtStudio, ejecutar desde el directorio unibotics/static/BtStudio
+git checkout v0.10.0  # Coger la rama v0.10.0
 ```
 
 ### Base de datos
