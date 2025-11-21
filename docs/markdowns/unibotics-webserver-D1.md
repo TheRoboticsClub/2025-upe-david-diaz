@@ -77,7 +77,7 @@ npm run dev  # Lanzar webpack
 
 # Si salen errores de *Module not found: Error: Can't resolve ...* relacionado con
 # BtStudio, ejecutar desde el directorio unibotics/static/BtStudio
-git checkout v0.10.0  # Coger la rama v0.10.0
+git checkout v0.10.0  # Coger la versión v0.10.0
 ```
 
 ### Base de datos
