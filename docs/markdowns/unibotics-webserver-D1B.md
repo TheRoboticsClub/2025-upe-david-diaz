@@ -30,27 +30,31 @@ para ello editaremos el fichero .env con el puerto, en este caso el puerto 8001.
 SERVER=127.0.0.1:8001
 ```
 
-### Contenedor para exponer API Docker (en el Docker remoto)
+### Contenedor para exponer API Docker
 Para que desde la sección de la granja de la web se puedan lanzar contenedores Robotics
 Backend desde las granjas que se hayan creado es necesario crear un contenedor en el
-puerto 23750 que exponga la API en el puerto 2375. Para ello ejecutaremos:
+puerto 23750 que exponga la API en el puerto 2375. Para ello ejecutaremos **en la máquina
+remota**:
 ```shell
 # Usaremos 0.0.0.0 para que sea accesible externamente
 docker run -d --restart=always -p 0.0.0.0:23750:2375 -v /var/run/docker.sock:/var/run/docker.sock  alpine/socat  tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
 ```
 > [!IMPORTANT]  
-> Habrá que incluir el puerto 23750 en el firewall de la nube remota.
+> Habrá que incluir el puerto 23750 en el firewall de la nube remota.  
+> Para estar seguro de tener los puertos que necesita el RoboticsBackend habrá que
+> tener en el firewall estos:
+> ```text
+> 7164, 1905, 2303, 8765, 6080-6090, 7681, 8080, 2304, 1904, 5900, 7163, 23750
+> ```
 
 Iniciando automáticamente el contenedor cada vez que se abra Docker Desktop, permitiendo
 que la web pueda lanzar Robotics Backends a las granjas.  
-Para comprobar que se está ejecutando podemos usar **en WSL**:
+Para comprobar que se está ejecutando podemos usar **en WSL** desde nuestro ordenador:
 ```shell
 echo "export DOCKER_HOST=tcp://<IP_DOCKER_REMOTO>:2375" >> ~/.bashrc && source ~/.bashrc
-sudo nc -zv 127.0.0.1 23750
+sudo nc -zv <IP_DOCKER_REMOTO> 23750
 ```
-y debería de salir ``Conection to 127.0.0.1 23750 port [tcp/*] succeed!``.  
-Para comprobar si el servicio se está ejecutando en otro ordenador habrá que usar su
-dirección IP en el comando ``sudo nc -zc <IP_DIR> 23750``.
+y debería de salir ``Conection to <IP_DOCKER_REMOTO> 23750 port [tcp/*] succeed!``.
 
 ### Crear contenedor redis
 Para que el contenedor RB de una granja se conecte con un ejercicio del webserver,
