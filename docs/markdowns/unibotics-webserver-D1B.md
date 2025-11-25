@@ -67,10 +67,10 @@ Si el puerto ya está en uso podemos usar otro, por ejemplo:
 ```shell
 docker run -d -p 6380:6379 redis
 ```
-Antes habrá que hacer un cambio en settings.py, en CHANNEL_LAYERS
+Antes habrá que hacer un cambio en settings.py, en CHANNEL_LAYERS:
 ```
 "CONFIG": {
-            "hosts": [("127.0.0.1", 6380)],  # El puerto a la izquierda del :
+            "hosts": [("127.0.0.1", <puerto_a_la_izq_del_:>)],
         },
 ```
 
@@ -100,3 +100,7 @@ Donde:
 - **El segundo puerto 8080:** 5900
 
 Y le damos a *Añadir máquina*.
+
+Lo siguiente que habría que hacer es crear una granja (si queremos que la máquina
+Docker remota pertenezca a otra) y añadirla a ella, y luego añadir la granja al
+usuario que estemos usando.
