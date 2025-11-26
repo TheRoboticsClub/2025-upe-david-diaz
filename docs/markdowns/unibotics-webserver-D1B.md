@@ -13,7 +13,7 @@ psql -U user-dev -d academy_db
 Una vez hemos accedido a la base de datos miraremos si las migraciones de Django se han
 completado bien, para ello ejecutaremos:
 ```shell
-\d academy_dockerfarm
+\d academy_dockerfarm  # Antiguo
 ```
 En caso de que la base de datos no esté comppleta habrá que borrar las migraciones de 
 Django y volver a hacer el despliegue D1.
@@ -45,6 +45,11 @@ docker run -d --restart=always -p 0.0.0.0:23750:2375 -v /var/run/docker.sock:/va
 > tener en el firewall estos:
 > ```text
 > 7164, 1905, 2303, 8765, 6080-6090, 7681, 8080, 2304, 1904, 5900, 7163, 23750
+> ```
+> Hay que lanzar el RoboticsBackend remoto con:
+> ```shell
+> # Si da error quitar **--gpus all** y **--device /dev/dri**
+> docker run --rm -it --gpus all -v /usr/lib/wsl:/usr/lib/wsl -e LD_LIBRARY_PATH=/usr/lib/wsl/lib --device /dev/dri -p 6080-6090:6080-6090 -p 7163:7163 jderobot/robotics-backend:latest
 > ```
 
 Iniciando automáticamente el contenedor cada vez que se abra Docker Desktop, permitiendo
@@ -101,6 +106,51 @@ Donde:
 
 Y le damos a *Añadir máquina*.
 
+> [!NOTE]  
+> Si no ves estos puertos o no funciona puede que la versión sea distinta, para
+> añadir la máquina entonces hay que ir a "Operator admin" y modificar las bases
+> de datos desde ahí, como se explica debajo.
+
 Lo siguiente que habría que hacer es crear una granja (si queremos que la máquina
 Docker remota pertenezca a otra) y añadirla a ella, y luego añadir la granja al
-usuario que estemos usando.
+usuario que estemos usando.  
+Y, una vez hecho todo esto, podemos entrar en cualquier ejercicio para conectarnos
+con nuestro RoboticsBackend remoto (hay que seleccionar la granja donde tenemos la
+maquina Docker remota para que lo use).
+
+> [!IMPORTANT]  
+> Si sale un error en bucle en el terminal de Daphne diciendo ``AttributeError:
+> 'NoneType' object has no attribute 'group_add'`` habrá que comentar el siguiente
+> *if* en **settings.py**:
+> ```python
+> DEPLOYMENT_TYPE = os.getenv("DEPLOYMENT_TYPE", "D1")
+> 
+> # if DEPLOYMENT_TYPE != "D1:
+>   # Configuraciones específicas de Channels
+> INSTALLED_APPS += ['channels']
+> ASGI_APLICATION = 'common.routing.application'
+> CHANNEL_LAYERS = {
+>   "default": {
+>       "BACKEND": "channels_redis.core.RedisChannelLayer",
+>       "CONFIG": {
+>           "hosts": [("127.0.0.1", <puerto_redis_a_la_izq_del_:>)]
+>       },
+>   },
+> }
+> """else:
+>   # Configuración estándar sin Channels
+>   WSGI_APPLICATION = 'common.wsgi.application'
+> """
+> ```
+> y con esto, todo debería de funcionar.
+
+Si después de conectarse con el RB remoto ves que las secciones de la derecha no
+funcionan debes modificar el HTML para que se use http en vez de https en estas
+peticiones, darle a F12 para usar las herramientas de desarrollador, elegir
+"Seleccionar un elemento para inspeccionarlo", poner el ratón encima de las zonas
+que no cargan y buscar:
+```html
+src="https://<IP_MAQUINA_REMOTA>:6080/vnc.html?..."
+src="https://<IP_MAQUINA_REMOTA>:6082/vnc.html?..."
+```
+Y quitar la 's' de https, con esto las secciones deberían de cargar.
