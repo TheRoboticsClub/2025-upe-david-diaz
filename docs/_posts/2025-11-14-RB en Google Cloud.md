@@ -1,7 +1,6 @@
 Ahora, vamos a desplegar por fin el contenedor de RoboticsBackend en la nube,
 para ello usaremos Google Cloud, con Google Compute Engine.
 
-> [!IMPORTANT]
 > Para poder utilizar los puertos que queremos tendremos que **crear una
 > regla de firewall**. Para ello, estando en el proyecto donde instanciamos
 > la Máquina Virtual, nos vamos al menú de las 3 barras horizontales (zona
@@ -17,7 +16,8 @@ para ello usaremos Google Cloud, con Google Compute Engine.
 > - **Protocolos y puertos:** Protocolos y puertos especificados
 >   - **TCP**: 1108, 6080, 7163 (los de RoboticsBackend)
 > 
-> Y le damos a *Crear*. 
+> Y le damos a *Crear*.
+{: .prompt-important}
 
 ## Pasos:
 - **1.** Crear una nueva instancia de Máquina Virtual.
@@ -82,9 +82,9 @@ Y ya nos podríamos comunicar con el Roboticsbackend corriendo en la nube
 de Google Compute Engine, usando la IP externa de la instancia de MV, que nos
 sale en el apartado *Instancias de VM* en la columna *IP externa*.
 
-> [!IMPORTANT]  
 > Acuérdate de detener la instancia para reducir costes.  
 > Para ello, en el apartado *Instancias de VM*, selecciona tu instancia en el
 > cuadrado a la izquierda de su nombre y dale a *Detener*, así Google Cloud
 > solamente te cobrará por tener la IP externa fija, y por el disco persistente,
 > pero no por CPU ni tiempo de cómputo (ya que la instancia está detenida).
+{: .prompt-important}

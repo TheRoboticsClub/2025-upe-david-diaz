@@ -4,8 +4,8 @@ Un último paso que tomaremos antes del objetivo de conseguir conectarnos al
 contenedor de RoboticsBackend ejecutando en remoto es ejecutar todo el servicio
 de unibotics-webserver en local (D1) y usar el RB local. Para ello:
 
-> [!IMPORTANT]  
 > Antes habrá que tener instalado Python, Git y Pycharm, además de WSL2 y PostgreSQL.
+{: .prompt-important}
 
 En la Git Bash ejecutaremos:
 

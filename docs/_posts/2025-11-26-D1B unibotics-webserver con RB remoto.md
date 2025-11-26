@@ -104,10 +104,10 @@ Donde:
 
 Y le damos a *Añadir máquina*.
 
-> [!NOTE]  
 > Si no ves estos puertos o no funciona puede que la versión sea distinta, para
 > añadir la máquina entonces hay que ir a "Operator admin" y modificar las bases
 > de datos desde ahí, como se explica debajo.
+{: .prompt-note}
 
 Lo siguiente que habría que hacer es crear una granja (si queremos que la máquina
 Docker remota pertenezca a otra) y añadirla a ella, y luego añadir la granja al
@@ -116,7 +116,6 @@ Y, una vez hecho todo esto, podemos entrar en cualquier ejercicio para conectarn
 con nuestro RoboticsBackend remoto (hay que seleccionar la granja donde tenemos la
 maquina Docker remota para que lo use).
 
-> [!IMPORTANT]  
 > Si sale un error en bucle en el terminal de Daphne diciendo ``AttributeError:
 > 'NoneType' object has no attribute 'group_add'`` habrá que comentar el siguiente
 > *if* en **settings.py**:
@@ -141,6 +140,7 @@ maquina Docker remota para que lo use).
 > """
 > ```
 > y con esto, todo debería de funcionar.
+{: .prompt-important}
 
 Si después de conectarse con el RB remoto ves que las secciones de la derecha no
 funcionan debes modificar el HTML para que se use http en vez de https en estas

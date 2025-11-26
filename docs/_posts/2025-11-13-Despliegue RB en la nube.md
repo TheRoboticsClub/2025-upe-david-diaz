@@ -47,8 +47,8 @@ Región: europe-west1 (Bélgica), zona cualquiera:
         n2d-standard-8 (8 vCPU, 4 núcleos, 32 GB RAM):
         218.12 UDS/mes (-15.25 USD/mes respecto a Madrid); 0.303 USD/hora
 
-> [!IMPORTANT]  
 > **Detener la instancia cuando no se esté usando para disminuir costes.**
+{: .prompt-important}
 
 
 ## Despliegue de Robotics-Backend en AWS con EC2
@@ -68,5 +68,5 @@ Región: Madrid (eu-south-1)
         m5.xlarge (4 CPU virtual, 16 GB de memoria):
         160 USD/mes aprox; 0.222 USD/hora
 
-> [!IMPORTANT]  
 > **Detener la instancia cuando no se esté usando para disminuir costes.**
+{: .prompt-important}
