@@ -1,4 +1,4 @@
-# Google Cloud para un contenedor Docker en la nube
+# AWS para un contenedor Docker en la nube
 
 ## Pasos:
 - **1.** Primero de todo iremos a *Elastic Container Registry* de
