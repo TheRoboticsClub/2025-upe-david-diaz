@@ -21,3 +21,10 @@ Para despliegues de contenedores podemos usar **Azure Container
 Instances (ACI)**, para despliegues rápidos, contenedores aislados;
 o **Azure Kubernetes Service (AKS)**, para aplicaciones en producción
 con escalabilidad avanzada o mayor complejidad y gestión.
+
+## Contenedor más complejo
+Si lo que queremos es ejecutar un contenedor más complejo en la nube lo que
+habrá que hacer es crear una instancia de Máquina Virtual y ahí instalar Docker
+y los contenedores que queramos ejecutar. Para ello habrá que habilitar también
+los puertos que usen esos contenedores (creando un firewall con esos puertos) para
+que puedan ser accesibles desde fuera.
