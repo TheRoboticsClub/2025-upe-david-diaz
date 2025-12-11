@@ -101,24 +101,82 @@ gcloud compute instances start <NOMBRE_MV> \
 ### DASH
 Iniciación a DASH.
 ```python
-from dash import Dash, html  # Main Dash app
-from dash import dcc, callback, Output, Input  # For interactivity
+import dash
 import dash_ag_grid as dag  # To display tables
 import dash_bootstrap_components as dbc  # Bootstrap components
+import pandas as pd  # For loading data
+
+from dash import html  # Main Dash app
+from dash import dcc, callback, Output, Input  # For interactivity
 
 external_stylesheets = [
     'url_to_stylesheet',
     dbc.themes.CERULEAN
 ]  # To use CSS in the app
 
-app = Dash.app(external_stylesheets=external_stylesheets)
+data = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/wind_dataset.csv")  # Data
+
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = [
-    html.Div(children="Hello world.")
+    html.H1(  # HTML h1
+        children="My first DASH application.",
+        style={'color': 'black', 'textAlign': 'center'}
+    ),
+
+    html.Div(children=[
+        html.Div(children="Input:"),  # HTML div
+        dcc.Dropdown(
+            id='input',  # For reference
+            options=[  # Different options of the dropdown
+                {'label': "Number 1", 'value': 1},
+                {'label': "Number 2", 'value': 2},
+                {'label': "Number 3", 'value': 3},
+            ],
+            multi=False,  # Only one option can be selected at the same time
+            value=1,  # Default value
+            style={'width': '30%'}
+        ),
+        html.Div(id='output'),
+    ], style={'margin-left': '2%'}),
+
+    html.H3(children='Graphics', style={'font-weight': 'bold', 'textAlign': 'center', 'color': 'black'}),
+    dcc.Graph(  # Graphic
+        id='graph1',
+        figure={  # Configuration of the graphs
+            'data': [
+                {'x': [1, 2, 3], 'y': [1, 2, 2], 'type': 'bar'}
+            ]
+        }
+    ),
+
+    html.Div(id='table', children=[
+        dag.AgGrid(
+            rowData=data.to_dict("records"),
+            columnDefs=[
+                {'field': 'direction'},
+                {'field': 'strength'},
+                {'field': 'frequency'},
+            ],
+            columnSize="sizeToFit"  # To fit the columns in the space
+        )
+    ], style={'width': '80%', 'margin': 'auto', 'margin-bottom': '5%'}),
 ]
+
+@app.callback(
+    Output('output', 'children'),
+    [Input('input', 'value')]
+)
+def update_output(value):
+    return f'The input is {value}.'
 
 if __name__ == "__main__":
     app.run(debug=True)
 ```
 
 ### Videos
+Subidos los vídeos sobre el despliegue de RoboticsBackend en las nubes de AWS,
+Azure y Google Cloud; y también sobre la verificación de que se puede usar
+Unibotics con el RB en estas nubes (vídeos en oculto, solo se pueden ver con
+el encale); subidos los enlaces a la documentación (en el fichero videotutorials)
+con un Pull Request creado.
