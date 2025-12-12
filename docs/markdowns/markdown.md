@@ -105,29 +105,37 @@ import dash
 import dash_ag_grid as dag  # To display tables
 import dash_bootstrap_components as dbc  # Bootstrap components
 import pandas as pd  # For loading data
+import plotly.express as px  # For graphics
 
 from dash import html  # Main Dash app
-from dash import dcc, callback, Output, Input  # For interactivity
+from dash import dcc, Output, Input  # For interactivity
 
 external_stylesheets = [
     'url_to_stylesheet',
-    dbc.themes.CERULEAN
+    dbc.themes.BOOTSTRAP
 ]  # To use CSS in the app
 
-data = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/wind_dataset.csv")  # Data
+my_input = dcc.Input(id='input', type='number', value=1, min=-2, max=2, step=0.5)
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+data = df = pd.DataFrame({
+    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
+    "Amount": [4, 1, 2, 2, 4, 5],
+    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
+})
+fig = px.bar(data, x="Fruit", y="Amount", color="City", barmode="group")  # Plotly bar chart
+
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets, title='My first DASH app')
 
 app.layout = [
     html.H1(  # HTML h1
-        children="My first DASH application.",
-        style={'color': 'black', 'textAlign': 'center'}
+        children="Application made with DASH in Python.",  # Content
+        style={'textAlign': 'center'}  # Style (CSS)
     ),
 
-    html.Div(children=[
-        html.Div(children="Input:"),  # HTML div
-        dcc.Dropdown(
-            id='input',  # For reference
+    html.Div(children=[  # HTML div
+        html.Div(children="Inputs:"),
+        dcc.Dropdown(  # HTML dropdown
+            id='dropdown',  # For reference
             options=[  # Different options of the dropdown
                 {'label': "Number 1", 'value': 1},
                 {'label': "Number 2", 'value': 2},
@@ -137,38 +145,72 @@ app.layout = [
             value=1,  # Default value
             style={'width': '30%'}
         ),
+        my_input,  # Created before
         html.Div(id='output'),
     ], style={'margin-left': '2%'}),
 
-    html.H3(children='Graphics', style={'font-weight': 'bold', 'textAlign': 'center', 'color': 'black'}),
+    dcc.Markdown(  # Markdown format
+        children="""
+        ## This is a markdown text
+        With URL to [DASH page](https://dash.plotly.com/)
+        """,
+        style={'textAlign': 'center'}
+    ),
+
+    html.H3(children='Graphics', style={'font-weight': 'bold', 'textAlign': 'center'}),  # HTML h3
     dcc.Graph(  # Graphic
         id='graph1',
         figure={  # Configuration of the graphs
             'data': [
-                {'x': [1, 2, 3], 'y': [1, 2, 2], 'type': 'bar'}
+                {'x': [1, 2, 3], 'y': [1, 2, 2], 'type': 'bar'}  # Bar chart without using plotly
+            ]
+        }
+    ),
+    dcc.Graph(
+        id='graph2',
+        figure={
+            'data': [
+                {'x': [1, 2, 3], 'y': [1, 2, 2]}  # Simple line chart without using plotly
             ]
         }
     ),
 
-    html.Div(id='table', children=[
-        dag.AgGrid(
-            rowData=data.to_dict("records"),
-            columnDefs=[
-                {'field': 'direction'},
-                {'field': 'strength'},
-                {'field': 'frequency'},
-            ],
-            columnSize="sizeToFit"  # To fit the columns in the space
-        )
-    ], style={'width': '80%', 'margin': 'auto', 'margin-bottom': '5%'}),
+    html.Div(
+        id='table',
+        children=[
+            dag.AgGrid(  # Add table
+                rowData=data.to_dict("records"),  # Data
+                columnDefs=[  # Name of the columns
+                    {'field': 'Fruit'},
+                    {'field': 'Amount'},
+                    {'field': 'City'},
+                ],
+                columnSize="sizeToFit",  # To fit the columns in the space (width)
+            ),
+            html.H3(
+                children='Figure with Plotly.express',
+                style={'font-weight': 'bold', 'textAlign': 'center', 'margin-top': '2%'}  # Style only for this text
+            ),
+            dcc.Graph(
+                id='example-graph',
+                figure=fig  # Plotly figure
+            )
+        ],
+        style={'width': '80%', 'margin': 'auto'}
+    ),
 ]
 
 @app.callback(
     Output('output', 'children'),
-    [Input('input', 'value')]
+    [Input('dropdown', 'value'),
+     Input(my_input, 'value')]  # Pass the object instead of id
 )
-def update_output(value):
-    return f'The input is {value}.'
+def update_output(dropdown_value, input_value):
+    """Update the output depending on the dropdown_value + input_value."""
+
+    if not dropdown_value:
+        return 'Dropdown value not selected.'
+    return f'The sum of the inputs is: {dropdown_value + input_value}.'
 
 if __name__ == "__main__":
     app.run(debug=True)
