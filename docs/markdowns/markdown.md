@@ -216,7 +216,8 @@ if __name__ == "__main__":
     app.run(debug=True)
 ```
 
-Visualización del código DASH de unibotics-webserver.
+Visualización del código DASH de unibotics-webserver. Prueba de los elementos
+DASH de unibotics-webserver.
 
 ### Videos
 Subidos los vídeos sobre el despliegue de RoboticsBackend en las nubes de AWS,
