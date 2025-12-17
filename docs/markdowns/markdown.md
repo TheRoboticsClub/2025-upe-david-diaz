@@ -217,11 +217,11 @@ if __name__ == "__main__":
 ```
 
 Visualización del código DASH de unibotics-webserver. Prueba de los elementos
-DASH de unibotics-webserver.
+DASH de unibotics-webserver. Visualización de las URL.
 
 ### Videos
 Subidos los vídeos sobre el despliegue de RoboticsBackend en las nubes de AWS,
 Azure y Google Cloud; y también sobre la verificación de que se puede usar
 Unibotics con el RB en estas nubes (vídeos en oculto, solo se pueden ver con
-el encale); subidos los enlaces a la documentación (en el fichero videotutorials)
+el enlace); subidos los enlaces a la documentación (en el fichero videotutorials)
 con un Pull Request creado.
