@@ -218,6 +218,7 @@ if __name__ == "__main__":
 
 Visualización del código DASH de unibotics-webserver. Prueba de los elementos
 DASH de unibotics-webserver. Visualización de las URL. Nueva versión de DASH.
+Análisis del nuevo código de unibotics_dash, errores reportados de app.py.
 
 ### Videos
 Subidos los vídeos sobre el despliegue de RoboticsBackend en las nubes de AWS,
