@@ -221,6 +221,8 @@ DASH de unibotics-webserver. Visualización de las URL. Nueva versión de DASH.
 Análisis del nuevo código de unibotics_dash, errores reportados de app.py.
 Ejecución del DASH de unibotics-webserver (despliegue D1C), apertura de Issue
 para reportar *requirements* faltantes.
+Cambios en el código de app.py, **Pull Request** de los requirements que faltaban
+y de los cambios en app.py.
 
 ### Videos
 Subidos los vídeos sobre el despliegue de RoboticsBackend en las nubes de AWS,
