@@ -232,4 +232,5 @@ el enlace); subidos los enlaces a la documentación (en el fichero videotutorial
 con un Pull Request creado.
 
 ### Webadmin
-Análisis de parte del código de unibotics/common (models.py, admin_site.py, ...)
+Análisis de parte del código de unibotics/common (models.py, admin_site.py, ...),
+creación de nueva rama (primeros cambios, ...)
