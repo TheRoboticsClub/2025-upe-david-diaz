@@ -234,3 +234,8 @@ con un Pull Request creado.
 ### Webadmin
 Análisis de parte del código de unibotics/common (models.py, admin_site.py, ...),
 creación de nueva rama (primeros cambios, ...)
+
+### Espacio de usuario
+Creación de un apartado en la página del perfil de usuario donde muestra una barra
+de progreso con el espacio que ocupa el usuario, además de los ejercicios vistos por
+el usuario y los proyectos que tiene (con el tamaño que ocupa cada uno).
