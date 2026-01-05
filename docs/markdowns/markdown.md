@@ -239,3 +239,5 @@ creación de nueva rama (primeros cambios, ...)
 Creación de un apartado en la página del perfil de usuario donde muestra una barra
 de progreso con el espacio que ocupa el usuario, además de los ejercicios vistos por
 el usuario y los proyectos que tiene (con el tamaño que ocupa cada uno).
+Primer despliegue en D2 para probar que a los usuarios les sale su espacio consumido
+en S3.
