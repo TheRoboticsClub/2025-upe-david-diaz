@@ -241,3 +241,6 @@ de progreso con el espacio que ocupa el usuario, además de los ejercicios visto
 el usuario y los proyectos que tiene (con el tamaño que ocupa cada uno).
 Primer despliegue en D2 para probar que a los usuarios les sale su espacio consumido
 en S3.
+Corrección de error que no mostraba el nombre de los ejercicios del usuario en S3 con
+la creación de otra función para obtener los directorios de un *path*, nuevo despliegue
+en D2 para prueba.
