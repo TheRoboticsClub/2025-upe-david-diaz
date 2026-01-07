@@ -244,3 +244,6 @@ en S3.
 Corrección de error que no mostraba el nombre de los ejercicios del usuario en S3 con
 la creación de otra función para obtener los directorios de un *path*, nuevo despliegue
 en D2 para prueba.
+Correción de errores que hacían que no se mostraran los ejercicio (probado en D2),
+ajustes para que salga también en D1; creación de una sección en Webadmin para ver
+el espacio de cada usuario, nuevo despliegue D2 para comprobar todo.
