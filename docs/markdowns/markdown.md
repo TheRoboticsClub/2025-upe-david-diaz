@@ -238,12 +238,16 @@ creación de nueva rama (primeros cambios, ...)
 ### Espacio de usuario
 Creación de un apartado en la página del perfil de usuario donde muestra una barra
 de progreso con el espacio que ocupa el usuario, además de los ejercicios vistos por
-el usuario y los proyectos que tiene (con el tamaño que ocupa cada uno).
+el usuario y los proyectos que tiene (con el tamaño que ocupa cada uno).  
 Primer despliegue en D2 para probar que a los usuarios les sale su espacio consumido
-en S3.
+en S3.  
 Corrección de error que no mostraba el nombre de los ejercicios del usuario en S3 con
 la creación de otra función para obtener los directorios de un *path*, nuevo despliegue
-en D2 para prueba.
+en D2 para prueba.  
 Correción de errores que hacían que no se mostraran los ejercicio (probado en D2),
 ajustes para que salga también en D1; creación de una sección en Webadmin para ver
-el espacio de cada usuario, nuevo despliegue D2 para comprobar todo.
+el espacio de cada usuario, nuevo despliegue D2 para comprobar todo.  
+Actualización del formato de la tabla de Space Management para que se parezca a `df` en
+Linux; añadidas columnas para espacio disponible y porcentaje de uso, además de tener
+los números con formato fichero, correción de error para mostrar proyectos, y cambio
+de Space Managements a Space Management en el enlace.
