@@ -251,3 +251,5 @@ Actualización del formato de la tabla de Space Management para que se parezca a
 Linux; añadidas columnas para espacio disponible y porcentaje de uso, además de tener
 los números con formato fichero, correción de error para mostrar proyectos, y cambio
 de Space Managements a Space Management en el enlace.
+Añadida columna para consultar detalles del espacio de usuario en Space Management,
+falta finalizar estilo CSS del HTML y probar en D2.
