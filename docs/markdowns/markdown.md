@@ -253,3 +253,4 @@ los números con formato fichero, correción de error para mostrar proyectos, y 
 de Space Managements a Space Management en el enlace.
 Añadida columna para consultar detalles del espacio de usuario en Space Management,
 falta finalizar estilo CSS del HTML y probar en D2.
+Todo probado y funcionando bien en D2 (Pull Request creado).
